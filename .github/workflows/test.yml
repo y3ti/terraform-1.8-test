@@ -10,7 +10,7 @@ jobs:
       matrix:
         terraform: ['1.8.0', '1.7.5']
 
-    runs-on: macos-latest
+    runs-on: macos-latest-xlarge
 
     steps:
       - uses: actions/checkout@v2
@@ -21,6 +21,10 @@ jobs:
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: ${{ matrix.terraform }}
+
+      - name: Terraform Version
+        run: terraform --version
+        working-directory: examples/multi-runner
 
       - name: Terraform Init
         run: terraform init --upgrade
