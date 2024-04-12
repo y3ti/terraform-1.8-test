@@ -17,10 +17,16 @@ jobs:
         with:
           repository: philips-labs/terraform-aws-github-runner
 
+      # - name: Setup Terraform
+      #   uses: hashicorp/setup-terraform@v1
+      #   with:
+      #     terraform_version: ${{ matrix.terraform }}
+
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
-        with:
-          terraform_version: ${{ matrix.terraform }}
+        run: |
+          wget https://releases.hashicorp.com/terraform/${{ matrix.terraform }}/terraform_${{ matrix.terraform}}_darwin_amd64.zip
+          unzip terraform_${{ matrix.terraform}}_darwin_amd64.zip
+          mv terraform /usr/local/bin/
 
       - name: Terraform Version
         run: terraform --version
