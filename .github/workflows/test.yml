@@ -24,8 +24,8 @@ jobs:
 
       - name: Setup Terraform
         run: |
-          wget https://releases.hashicorp.com/terraform/${{ matrix.terraform }}/terraform_${{ matrix.terraform}}_darwin_amd64.zip
-          unzip terraform_${{ matrix.terraform}}_darwin_amd64.zip
+          wget https://releases.hashicorp.com/terraform/${{ matrix.terraform }}/terraform_${{ matrix.terraform}}_darwin_arm64.zip
+          unzip terraform_${{ matrix.terraform}}_darwin_arm64.zip
           mv terraform /usr/local/bin/
 
       - name: Terraform Version
