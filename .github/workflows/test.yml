@@ -1,0 +1,35 @@
+on:
+  workflow_dispatch:
+  push:
+    branches:
+    - main
+
+jobs:
+  terraform:
+    strategy:
+      matrix:
+        terraform: ['1.8.0', '1.7.5']
+
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          repository: philips-labs/terraform-aws-github-runner
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: ${{ matrix.terraform }}
+
+      - name: Terraform Init
+        run: terraform init --upgrade
+        working-directory: examples/multi-runner
+
+      - name: Terraform Validate
+        run: time terraform validate
+        working-directory: examples/multi-runner
+
+      - name: Terraform Validate
+        run: time terraform validate
+        working-directory: examples/multi-runner        
