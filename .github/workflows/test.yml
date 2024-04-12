@@ -22,6 +22,9 @@ jobs:
       #   with:
       #     terraform_version: ${{ matrix.terraform }}
 
+      - name: Info
+        run: sysctl -a | grep machdep.cpu
+
       - name: Setup Terraform
         run: |
           wget https://releases.hashicorp.com/terraform/${{ matrix.terraform }}/terraform_${{ matrix.terraform}}_darwin_arm64.zip
